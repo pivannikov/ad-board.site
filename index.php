@@ -1,6 +1,11 @@
 <?php
 namespace Core;
 
+use Exception;
+use Twig\Environment;
+use Twig\Extra\Html\HtmlExtension;
+use Twig\Loader\FilesystemLoader;
+
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
@@ -17,10 +22,10 @@ spl_autoload_register(function($class) {
         if (class_exists($class, false)) {
             return true;
         } else {
-            throw new \Exception("Class $class does not found in file $path. Check the class name.");
+            throw new Exception("Class $class does not found in file $path. Check the class name.");
         }
     } else {
-        throw new \Exception("For class $class does not foumd file $path.");
+        throw new Exception("For class $class does not found file $path.");
     }
 });
 
@@ -33,8 +38,13 @@ $page  = ( new Dispatcher ) -> getPage($track);
 
 # twig
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
-$loader = new \Twig\Loader\FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . '/project/views');
-$twig = new \Twig\Environment($loader);
-echo $twig->render($page->view . '.html', $page->data);
+$loader = new FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . '/project/views');
+$twig = new Environment($loader);
+$twig->addExtension(new HtmlExtension());
 
+
+//echo '<pre>';
+//print_r($page->data);
+//echo '</pre>';
+echo $twig->render($page->view . '.html.twig', $page->data);
 

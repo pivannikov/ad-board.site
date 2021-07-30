@@ -10,7 +10,10 @@ class Post extends Model
 {
     public function getById($id)
     {
-        return $this->findOne("SELECT * FROM posts WHERE id=$id");
+        return $this->findOne("
+            SELECT p.id, p.category_id, p.title, p.body, p.created_at, c.title AS category FROM posts p 
+            JOIN categories c ON p.category_id=c.id
+            WHERE p.id=$id");
     }
 
     public function getAll()
@@ -20,6 +23,7 @@ class Post extends Model
 
     public function getByRandom($quantity)
     {
-        return $this->findMany("SELECT * FROM cars-blog.posts ORDER BY rand() LIMIT $quantity");
+        return $this->findMany("SELECT * FROM posts ORDER BY rand() LIMIT $quantity");
     }
+
 }

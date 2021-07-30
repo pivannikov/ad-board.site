@@ -1,51 +1,37 @@
 <?php
 namespace Core;
 
-//class Model
-//{
-//    private static $link;
-//
-//    public function __construct()
-//    {
-//        if (!self::$link) {
-//            self::$link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-//            mysqli_query(self::$link, "SET NAMES 'utf8'");
-//        }
-//    }
-//
-//    protected function findOne($query)
-//    {
-//        $result = mysqli_query(self::$link, $query) or die(mysqli_error(self::$link));
-//        return mysqli_fetch_assoc($result);
-//    }
-//
-//    protected function findMany($query)
-//    {
-//        $result = mysqli_query(self::$link, $query) or die(mysqli_error(self::$link));
-//        for ($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
-//
-//        return $data;
-//    }
-//}
-
-
+use http\Exception\InvalidArgumentException;
 use PDO;
+use PDOException;
 
 class Model
 {
+    private static $db;
 
-    protected function findOne($query)
+    public function __construct()
     {
-        $pdo = DB::getInstance()->get_pdo();
-        $stmt = $pdo->query($query);
+        if (!self::$db) {
+            try {
+                self::$db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+            } catch (PDOException $exception) {
+                throw new InvalidArgumentException($exception->getMessage());
+            }
+        }
+    }
+
+    protected function findOne($query, $params = [])
+    {
+        $stmt = self::$db->prepare($query);
+        $stmt->execute($params);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     protected function findMany($query)
     {
-        $pdo = DB::getInstance()->get_pdo();
-        $stmt = $pdo->query($query);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = self::$db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 

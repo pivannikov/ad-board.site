@@ -5,6 +5,6 @@ class Controller
 {
 
     protected function renderTemplate($view, $data = []) {
-        return new Page($this->title, $view, $data);
+        return new Page($view, $data);
     }
 }
