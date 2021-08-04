@@ -4,6 +4,7 @@ namespace Core;
 class Page
 {
     public function __construct(
+        private $title,
         private $view = null,
         private $data = []
     ) {}

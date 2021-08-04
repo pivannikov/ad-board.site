@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 .box
 {
 	position: relative;
@@ -58,4 +60,11 @@ a {
 
 a:hover {
 	color: #4d4d52;
+}
+
+.brand {
+	font-family: 'Lobster', cursive;
+	font-size: 44px;
+	color: #ffc107;
+	text-shadow: 3px 5px 1px rgba(0, 0, 0, 0.7);
 }

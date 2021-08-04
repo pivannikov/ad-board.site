@@ -3,6 +3,7 @@ namespace Core;
 
 use Exception;
 use Twig\Environment;
+use Twig\Extension\DebugExtension;
 use Twig\Extra\Html\HtmlExtension;
 use Twig\Loader\FilesystemLoader;
 
@@ -39,12 +40,15 @@ $page  = ( new Dispatcher ) -> getPage($track);
 # twig
 require_once $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 $loader = new FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . '/project/views');
-$twig = new Environment($loader);
+$twig = new Environment($loader, ['debug' => true]);
 $twig->addExtension(new HtmlExtension());
+$twig->addExtension(new DebugExtension());
 
 
 //echo '<pre>';
 //print_r($page->data);
+//print_r($track);
+//print_r($page);
 //echo '</pre>';
 echo $twig->render($page->view . '.html.twig', $page->data);
 

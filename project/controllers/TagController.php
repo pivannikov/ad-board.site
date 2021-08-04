@@ -9,9 +9,10 @@ use Project\Models\Tag;
 
 class TagController extends Controller
 {
-    public function show($id)
+    public function show($tag)
     {
-        $posts = (new Tag())->getPostsByTag($id['var']);
-        return $this->renderTemplate('tags/show', ['posts' => $posts]);
+        $this->title = 'Tag: ' . $tag['var'];
+        $posts = (new Tag())->getPostsByTag($tag['var']);
+        return $this->renderTemplate('posts/index', ['posts' => $posts, 'title' => $this->title]);
     }
 }

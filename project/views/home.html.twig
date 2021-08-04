@@ -3,10 +3,16 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+    <div class="row">
+        <div class="col-sm-0 col-md-3 col-lg-3 col-xl-2 col-xxl-2 img-fluid">{{ source('/images/advertisement.svg') }}</div>
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-8 col-xxl-8 p-5"><h6 class="text-center">Board for advertisements. Made on PHP8 without using a framework, on self-written classes, using the Twig template engine. There is blog navigation, viewing a single article, sorting by categories and tags. Site search works.</h6></div>
+        <div class="col-sm-0 col-md-3 col-lg-3 col-xl-2 col-xxl-2 img-fluid">{{ source('/images/group.svg') }}</div>
+    </div>
+
 {% for post in posts %}
-    <div class="col-md-2 mt-3">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xxl-2 mt-3">
         <div class="box">
-            <span class="item"><img src="/project/views/pin_{{ random(['blue', 'red', 'yellow']) }}.png" alt="" width="40"></span>
+            <span class="item mb-2">&#128204;</span>
             <a href="/post/{{ post.id }}">
                 <h5 class="card-title">{{ post.title }}</h5>
                 <div class="">{{ post.body|slice(0,100) }}...</div>

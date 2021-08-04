@@ -13,14 +13,12 @@ class SearchController extends Controller
 
     public function searchResult()
     {
+        $this->title = 'Search';
         if (!empty($_POST['query'])) {
             $search_query = $_POST['query'];
             $search_query = trim($search_query);
             $posts = (new Search())->searchRequest($search_query);
-//            echo '<pre>';
-//            print_r($posts);
-//            echo '</pre>';
-            return $this->renderTemplate('search/results', ['posts' => $posts]);
+            return $this->renderTemplate('search/results', ['posts' => $posts, 'title' => $this->title]);
         }
         else {
             return $this->renderTemplate('search/results');
@@ -38,4 +36,8 @@ class SearchController extends Controller
     }
 
 }
+
+
+
+
 

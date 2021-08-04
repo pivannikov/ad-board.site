@@ -8,9 +8,9 @@ use Core\Model;
 
 class Category extends Model
 {
-    public function getById($id)
+    public function getById($slug)
     {
-        return $this->findOne("SELECT * FROM categories WHERE id=$id");
+        return $this->findOne("SELECT * FROM categories WHERE slug=$slug");
     }
 
     public function getAll()
@@ -18,9 +18,14 @@ class Category extends Model
         return $this->findMany("SELECT * FROM categories");
     }
 
-    public function getPostsByCategory($id)
+    public function getPostsByCategory($slug)
     {
-        return $this->findMany("SELECT * FROM posts WHERE category_id=$id");
+        return $this->findMany("
+            SELECT p.id, p.category_id, p.title, p.body, p.created_at, c.title as category, c.slug as category_slug 
+            FROM posts p 
+            JOIN categories c ON c.id=p.category_id
+            WHERE c.slug='$slug'
+        ");
     }
 
 }
