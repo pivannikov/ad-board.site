@@ -3,10 +3,10 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="row mb-5">
         <div class="order-0 col-6 col-sm-6 col-md-3 col-xl-2 img-fluid">{{ source('/images/advertisement.svg') }}</div>
         <div class="order-1 col-6 col-sm-6 col-md-3 col-xl-2 img-fluid">{{ source('/images/group.svg') }}</div>
-        <div class="order-2 col-12 col-sm-12 col-md-6 col-xl-8 p-5"><h6 class="text-center">Board for advertisements. Made on PHP8 without using a framework, on self-written classes, using the Twig template engine. There is blog navigation, viewing a single article, sorting by categories and tags. Site search works.</h6></div>
+        <div class="d-flex align-items-center order-2 col-12 col-sm-12 col-md-6 col-xl-8 pt-2"><h6 class="text-center">Board for advertisements. Made on PHP8 without using a framework, on self-written classes, using the Twig template engine. There is blog navigation, viewing a single article, sorting by categories and tags. Site search works.</h6></div>
     </div>
 
 {% for post in posts %}
