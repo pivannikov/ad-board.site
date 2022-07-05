@@ -1,7 +1,8 @@
 <?php
 namespace Core;
 
-use http\Exception\InvalidArgumentException;
+// use http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 use PDO;
 use PDOException;
 

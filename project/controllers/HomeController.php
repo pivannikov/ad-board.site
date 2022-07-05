@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         $this->title = 'Home';
-        $posts = (new Post)->getByRandom(6);
+        $posts = (new Post)->getByRandom(12);
         $tags = (new Tag)->getAll();
         return $this->renderTemplate('home', ['posts' => $posts, 'tags' => $tags, 'title' => $this->title]);
     }
