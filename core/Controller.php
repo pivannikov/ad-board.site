@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-class Controller
+class Controller extends \stdClass
 {
 
     protected function renderTemplate($view, $data = []) {
